@@ -8,7 +8,7 @@
 * Speedserver
 
 ### Exclude Installation
-* Mysql
+* Mysql **(it means that the script is used to link remote database by default)**
 
 ### Run
 * ```wget https://raw.githubusercontent.com/VoganWong/ssscript/master/ssinit.sh```
@@ -26,6 +26,3 @@
 * if you run the script to the end, and set starting manyuser, the manyuser will be putted into system service
 * you can use ```service ssstart``` to start the ss
 * but it has been setted to start with system starting by default
-
-
-
