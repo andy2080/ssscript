@@ -3,38 +3,42 @@ cd ~
 
 #install git
 yum -y install git
+echo -e "\033[44;37;5m ####  git have been installed  #### \033[0m "
+sleep 3
 
 # install setuptools module
-wget https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py
+wget -q http://peak.telecommunity.com/dist/ez_setup.py
 python ez_setup.py
 
 # install python-pip
-wget --no-check-certificate https://github.com/pypa/pip/archive/1.5.5.tar.gz
-tar zvxf 1.5.5.tar.gz
-cd pip-1.5.5/
-python setup.py install
-cd ~
-rm -rf 1.5.5.tar.gz pip-1.5.5 ez_setup.py setuptools*.zip
 easy_install pip
 pip install cymysql
 yum install -y m2crypto
 echo -e "\033[44;37;5m ####  python correlation have been installed  #### \033[0m "
+sleep 3
 
 # git clone manyuser
 git clone -b manyuser https://github.com/VoganWong/shadowsocks.git
 echo -e "\033[44;37;5m ####  manyusr have been downloaded  #### \033[0m "
+sleep 3
 
 # what's virt of your vps
 yum -y install virt-what
 virt-what
 vps=$(virt-what)
+echo -e "\033[44;37;5m ####  virt-what have been installed  #### \033[0m "
+sleep 3
+
 if [ $vps == 'openvz' ]
 then
     echo -e "\033[41;37m ####  your vps is not available to install serverSpeeder  #### \033[0m "
-    echo 'exit'
+    echo 'exit ...'
+    sleep 3
     exit
 else
     echo -e "\033[44;37;5m ####  your vps is available to install serverSpeeder  #### \033[0m "
+    sleep 3
+
     # install expect
     yum -y install expect
 
@@ -52,9 +56,9 @@ else
 
     cd server*/apx*/etc
     rm -f apx-20341231.lic
-    wget "http://pubilc.download.seryox.com/lot.php?mac=${MAC}&year=2038&bw=204800" apx-20341231.lic
+    wget -O apx-20341231.lic "http://pubilc.download.seryox.com/lot.php?mac=${MAC}&year=2038&bw=204800"
     cd ../..
-    wget --no-check-certificate serverSpeeder.sh https://www.seryox.com/shell/.serverSpeeder.sh
+    wget --no-check-certificate -O serverSpeeder.sh "https://www.seryox.com/shell/.serverSpeeder.sh"
     chmod +x serverSpeeder.sh
     chmod +x install.sh
     ./serverSpeeder.sh
@@ -62,20 +66,22 @@ else
     cd ~
     rm -rf serverSpeeder*
     echo -e "\033[44;37;5m ####  serverSpeeder have been installed  #### \033[0m "
-    service serverSpeeder start
     sleep 3
+    service serverSpeeder start
     service serverSpeeder status
 fi
 
 echo -e "\033[44;37;5m ####  stop vps's iptables  #### \033[0m "
 # stop iptables
+sleep 3
 service iptables stop
 
 echo -e "\033[44;37;5m ####  test your vps's speed  #### \033[0m "
 # install speedtest-cli.py
-wget --no-check-certificate speedtest-cli https://raw.github.com/sivel/speedtest-cli/master/speedtest_cli.py
+sleep 3
+wget --no-check-certificate -O speedtest-cli.py https://raw.github.com/sivel/speedtest-cli/master/speedtest_cli.py
 chmod +x speedtest*
-./speedtest-cli
+./speedtest-cli.py
 
 echo -e -n "\033[44;37;5m ####  Do you want to modify the manyuser config?(y/n) #### \033[0m"
 read confirm
@@ -83,6 +89,8 @@ if [ "$confirm"x = "y"x ]; then
     file="shadowsocks/shadowsocks/Config.py"
     if [ ! -r $file ]; then
         echo -e "\033[41;37m ####  can not find the Config.py!!!  #### \033[0m "
+        echo "exiting..."
+        sleep 3
         exit 0
     fi
 
@@ -113,15 +121,17 @@ if [ "$confirm"x = "y"x ]; then
         sed -i "s/ss/$MYSQL_PASS/g" $file
         sed -i "s/shadowsocks/$MYSQL_DB/g" $file
         echo "write the config successfully!"
+        sleep 3
     else
         echo "Plz modify the file on your own! I don't want to help you anymore.:) "
+        echo "exiting..."
+        sleep 3
         exit 0
     fi
 
     echo -n "Do you want to start manyuser? (y/n): "
     read confirm
     if [ "$confirm"x = "y"x ]; then
-        # cd shadowsocks/shadowsocks;
         # set ss as a service of system
         touch ssstart.sh
         chmod +x ssstart.sh
@@ -129,6 +139,7 @@ if [ "$confirm"x = "y"x ]; then
         cp ssstart.sh /etc/init.d/ssstart -f
         chkconfig --add ssstart
         nohup service ssstart >& /dev/null &
+        rm -f ssstart.sh
     else
         echo "Plz run the server on your own! I don't want to help you anymore.:) "
         exit 0
