@@ -1,5 +1,6 @@
 #!/bin/sh
-cd ~
+
+# author@https://github.com/VoganWong
 
 function fInstallGit() {
     #install git
@@ -13,6 +14,7 @@ function fInstallPip() {
     wget -q http://peak.telecommunity.com/dist/ez_setup.py
     python ez_setup.py
     easy_install pip
+    rm -f ez_setup.py*
     echo -e "\033[44;37;5m ####  pip have been installed  #### \033[0m "
     sleep 3
 }
@@ -163,10 +165,24 @@ function fSetService() {
         nohup service ssstart >& /dev/null &
         rm -f ssstart.sh
     else
-        echo "Plz run the server on your own! I don't want to help you anymore.:) "
-        exit 0
+        return
     fi
 }
+
+cd ~
+echo -e
+        '
+           ###     ###     ###                #          #
+          #   #   #   #   #   #                          #
+         #       #       #        ##   # ##  #    ###  ####
+          ###     ###     ###    #  #  ##    #    #  #  #
+             #       #       #  #      #     #    #  #  #
+        #    #  #    #  #    #  #     #     #    #   # #
+        #   #   #   #   #   #   #  #  #     #    #  #  #
+         ###     ###     ###     ##   #     #    ###   ##
+                                                #
+                                                #           '
+sleep 3
 
 fInstallGit
 fInstallPip
@@ -178,3 +194,7 @@ fStopIptables
 fInstallSpeedtest
 fSetManyuser
 fSetService
+
+echo -e -n "\033[44;37;5m ####  Everything is OK. Enjoy it. #### \033[0m"
+sleep 3
+exit 0
