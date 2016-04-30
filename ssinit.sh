@@ -132,7 +132,7 @@ function fSetManyuser() {
             sleep 3
             return
         fi
-        fModifyConfig()
+        fModifyConfig
         echo -n "Are you sure(y/n): "
         read confirm
         if [ "$confirm"x = "y"x ]; then
@@ -144,7 +144,7 @@ function fSetManyuser() {
             echo "write the config successfully!"
             sleep 3
         else
-            fSetManyuser()
+            fSetManyuser
         fi
     fi
 }
@@ -168,13 +168,13 @@ function fSetService() {
     fi
 }
 
-fInstallGit()
-fInstallPip()
-fInstallDependency()
-fInstallManyuser()
-fInstallVirtWhat()
-fInstallServerSpeeder()
-fStopIptables()
-fInstallSpeedtest()
-fSetManyuser()
-fSetService()
+fInstallGit
+fInstallPip
+fInstallDependency
+fInstallManyuser
+fInstallVirtWhat
+fInstallServerSpeeder
+fStopIptables
+fInstallSpeedtest
+fSetManyuser
+fSetService
