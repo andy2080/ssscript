@@ -44,9 +44,9 @@ function fInstallServerSpeeder() {
     if [ $vps == 'openvz' ]
     then
         echo -e "\033[41;37m ####  your vps is not available to install serverSpeeder  #### \033[0m "
-        echo 'exit ...'
+        echo 'exiting install serverSpeeder...'
         sleep 3
-        exit 0
+        return
     else
         echo -e "\033[44;37;5m ####  your vps is available to install serverSpeeder  #### \033[0m "
         sleep 3
