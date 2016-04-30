@@ -170,19 +170,16 @@ function fSetService() {
 }
 
 cd ~
-echo -e
-        '
-           ###     ###     ###                #          #
-          #   #   #   #   #   #                          #
-         #       #       #        ##   # ##  #    ###  ####
-          ###     ###     ###    #  #  ##    #    #  #  #
-             #       #       #  #      #     #    #  #  #
-        #    #  #    #  #    #  #     #     #    #   # #
-        #   #   #   #   #   #   #  #  #     #    #  #  #
-         ###     ###     ###     ##   #     #    ###   ##
-                                                #
-                                                #
-                                                '
+echo -e "          ###     ###     ###                #             #"
+echo -e "         #   #   #   #   #   #                            #"
+echo -e "        #       #       #        ##   # ##  #    ####   ####"
+echo -e "         ###     ###     ###    #  #  ##    #    #   #   #"
+echo -e "            #       #       #  #      #     #    #   #   #"
+echo -e "       #    #  #    #  #    #  #      #     #    #   #   #"
+echo -e "       #   #   #   #   #   #   #  #   #     #    #  #    #"
+echo -e "        ###     ###     ###     ##   #     #    ###       ##"
+echo -e "                                                #"
+echo -e "                                                #"
 sleep 3
 
 fInstallGit
@@ -196,6 +193,6 @@ fInstallSpeedtest
 fSetManyuser
 fSetService
 
-echo -e "\033[44;37;5m ####  Everything is OK. Enjoy it. #### \033[0m"
+echo -n "\033[44;37;5m #### Everything is OK. Enjoy it! #### \033[0m"
 sleep 3
 exit 0
