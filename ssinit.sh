@@ -153,7 +153,7 @@ function fSetManyuser() {
 
 
 function fSetService() {
-    echo -n "\033[44;37;5m #### Do you want to put manyuser into system service? (y/n): #### \033[0m"
+    echo -e "\033[44;37;5m #### Do you want to put manyuser into system service? (y/n): #### \033[0m"
     read confirm
     if [ "$confirm"x = "y"x ]; then
         # set ss as a service of system
@@ -193,6 +193,6 @@ fInstallSpeedtest
 fSetManyuser
 fSetService
 
-echo -n "\033[44;37;5m #### Everything is OK. Enjoy it! #### \033[0m"
+echo -e "\033[44;37;5m #### Everything is OK. Enjoy it! #### \033[0m"
 sleep 3
 exit 0
