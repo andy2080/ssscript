@@ -116,12 +116,15 @@ function fModifyConfig() {
     read MYSQL_PASS
     echo -e -n "input  ""\033[42;37m MYSQL_DB \033[0m"" :"
     read MYSQL_DB
+    echo -e -n "input  ""\033[42;37m MYSQL_TABLE \033[0m"" :"
+    read MYSQL_TABLE
     echo -e "Your config is : \r"
     echo -e "\033[47;30m $MYSQL_HOST \033[0m"
     echo -e "\033[47;30m $MYSQL_PORT \033[0m"
     echo -e "\033[47;30m $MYSQL_USER \033[0m"
     echo -e "\033[47;30m $MYSQL_PASS \033[0m"
     echo -e "\033[47;30m $MYSQL_DB \033[0m"
+    echo -e "\033[47;30m $MYSQL_TABLE \033[0m"
 }
 
 function fSetManyuser() {
@@ -138,11 +141,12 @@ function fSetManyuser() {
         echo -n "Are you sure(y/n): "
         read confirm
         if [ "$confirm"x = "y"x ]; then
-            sed -i "s/mdss.mengsky.net/$MYSQL_HOST/g" $file
+            sed -i "s/127.0.0.1/$MYSQL_HOST/g" $file
             sed -i "s/3306/$MYSQL_PORT/g" $file
-            sed -i "s/ss/$MYSQL_USER/g" $file
-            sed -i "s/ss/$MYSQL_PASS/g" $file
+            sed -i "s/mother/$MYSQL_USER/g" $file
+            sed -i "s/fucker/$MYSQL_PASS/g" $file
             sed -i "s/shadowsocks/$MYSQL_DB/g" $file
+            sed -i "s/user/$MYSQL_TABLE/g" $file
             echo "write the config successfully!"
             sleep 3
         else
@@ -153,7 +157,7 @@ function fSetManyuser() {
 
 
 function fSetService() {
-    echo -e "\033[44;37;5m #### Do you want to put manyuser into system service? (y/n): #### \033[0m"
+    echo -e -n "\033[44;37;5m #### Do you want to put manyuser into system service? (y/n): #### \033[0m"
     read confirm
     if [ "$confirm"x = "y"x ]; then
         # set ss as a service of system
@@ -170,6 +174,7 @@ function fSetService() {
 }
 
 cd ~
+echo -e " "
 echo -e "          ###     ###     ###                #             #"
 echo -e "         #   #   #   #   #   #                            #"
 echo -e "        #       #       #        ##   # ##  #    ####   ####"
