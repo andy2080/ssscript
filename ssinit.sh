@@ -2,6 +2,12 @@
 
 # author@https://github.com/VoganWong
 
+function fGetPublicIP() {
+    echo -e "\033[44;37;5m ####  your vps public IP is  #### \033[0m "
+    curl icanhazip.com
+    sleep 3
+}
+
 function fInstallGit() {
     #install git
     yum -y install git
@@ -93,6 +99,13 @@ function fStopIptables() {
     sleep 3
 }
 
+function fInstallPHP70() {
+    rpm -Uvh http://mirror.webtatic.com/yum/el6/latest.rpm
+    yum -y install php70w.x86_64 php70w-cli.x86_64 php70w-common.x86_64 php70w-gd.x86_64 php70w-ldap.x86_64 php70w-mbstring.x86_64 php70w-mcrypt.x86_64 php70w-mysql.x86_64 php70w-pdo.x86_64 php70w-xml.x86_64 php70w-fpm
+    echo -e "\033[44;37;5m ####  PHP70 have been installed  #### \033[0m "
+    sleep 3
+}
+
 function fInstallSpeedtest() {
     # install speedtest-cli.py
     echo -e "\033[44;37;5m ####  test your vps's speed  #### \033[0m "
@@ -141,13 +154,13 @@ function fSetManyuser() {
         echo -n "Are you sure(y/n): "
         read confirm
         if [ "$confirm"x = "y"x ]; then
-            sed -i "s/127.0.0.1/$MYSQL_HOST/g" $file
+            sed -i "s/localhost/$MYSQL_HOST/g" $file
             sed -i "s/3306/$MYSQL_PORT/g" $file
             sed -i "s/mother/$MYSQL_USER/g" $file
             sed -i "s/fucker/$MYSQL_PASS/g" $file
             sed -i "s/shadowsocks/$MYSQL_DB/g" $file
             sed -i "s/user/$MYSQL_TABLE/g" $file
-            echo "write the config successfully!"
+            echo -e -n "\033[44;37;5m ####  write the config successfully! #### \033[0m"
             sleep 3
         else
             fSetManyuser
@@ -175,18 +188,19 @@ function fSetService() {
 
 cd ~
 echo -e " "
-echo -e "          ###     ###     ###                #             #"
-echo -e "         #   #   #   #   #   #                            #"
-echo -e "        #       #       #        ##   # ##  #    ####   ####"
-echo -e "         ###     ###     ###    #  #  ##    #    #   #   #"
-echo -e "            #       #       #  #      #     #    #   #   #"
-echo -e "       #    #  #    #  #    #  #      #     #    #   #   #"
-echo -e "       #   #   #   #   #   #   #  #   #     #    #  #    #"
-echo -e "        ###     ###     ###     ##   #     #    ###       ##"
-echo -e "                                                #"
-echo -e "                                                #"
+echo -e "        ###     ###     ###                #             #"
+echo -e "       #   #   #   #   #   #                            #"
+echo -e "      #       #       #        ##   # ##  #    ####   ####"
+echo -e "       ###     ###     ###    #  #  ##    #    #   #   #"
+echo -e "          #       #       #  #      #     #    #   #   #"
+echo -e "     #    #  #    #  #    #  #      #     #    #   #   #"
+echo -e "     #   #   #   #   #   #   #  #   #     #    #  #    #"
+echo -e "      ###     ###     ###     ##   #     #    ###       ##"
+echo -e "                                              #"
+echo -e "                                              #"
 sleep 3
 
+fGetPublicIP
 fInstallGit
 fInstallPip
 fInstallDependency
