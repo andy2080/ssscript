@@ -34,10 +34,8 @@ status() {
     if [ -f /var/lock/subsys/$SNAME ]
     then
         echo "$SERVICE is running!"
-        exit 0;
     else
         echo "$SERVICE is not running!"
-        exit 0;
     fi
 }
 
@@ -57,7 +55,7 @@ status)
   RETVAL=$?
   ;;
 *)
-    echo $"Usage: $0 {start|stop|restart|status}"
+    echo $"Usage: ssscript {start|stop|restart|status}"
     exit 1
 esac
 

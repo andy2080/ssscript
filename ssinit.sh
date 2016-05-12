@@ -178,7 +178,10 @@ function fSetService() {
     chmod +x ssservice.sh
     cp ssservice.sh /etc/init.d/ssscript -f
     chkconfig --add ssscript
-    nohup service ssscript start
+    echo 'PATH=/etc/init.d:$PATH' >> /etc/profile
+    echo 'export PATH' >> /etc/profile
+    source /etc/profile
+    ssscript start
     sleep 3
     rm -f ssservice.sh
 }

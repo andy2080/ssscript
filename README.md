@@ -21,12 +21,11 @@
 * Mysql Password
 * Mysql Port
 * Mysql Database
+* Mysql TABLE
 
 ### manyuser Path
 * Config.py => shadowsocks/shadowsocks/Config.py
 * Server.py => shadowsocks/shadowsocks/server.py
 
-### Start manyuser
-* if you run the script to the end, and set starting manyuser, the manyuser will be putted into system service
-* you can use ```service ssstart``` to start the ss
-* but it has been setted to start with system starting by default
+### Usage
+* ssscript {start|stop|restart|status}
