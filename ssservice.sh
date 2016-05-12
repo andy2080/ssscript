@@ -1,4 +1,5 @@
-#chkconfig: 2345 24 25\n
+#!/bin/sh
+#chkconfig: 2345 80 90
 #description: manage the shadowsocks manyuser\n
 
 SERVICE=SSScript

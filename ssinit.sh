@@ -172,8 +172,9 @@ function fSetManyuser() {
 function fSetService() {
     echo -e -n "\033[44;37;5m #### put ssscript into system service #### \033[0m"
     # set ss as a service of system
-    if [ ! -f ssservice.sh ]
-        wget --no-check-certificate -O ssservice.sh https://raw.githubusercontent.com/VoganWong/ssscript/master/ssservice.sh
+    if [ ! -f "ssservice.sh" ]
+    then
+        wget --no-check-certificate -O ssservice.sh "https://raw.githubusercontent.com/VoganWong/ssscript/master/ssservice.sh"
     fi
     chmod +x ssservice.sh
     cp ssservice.sh /etc/init.d/ssscript -f
@@ -212,6 +213,7 @@ fInstallSpeedtest
 fSetManyuser
 fSetService
 
+echo ''
 echo -e "\033[44;37;5m #### Everything is OK. Enjoy it! #### \033[0m"
 sleep 3
 exit 0
