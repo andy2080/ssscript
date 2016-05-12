@@ -160,7 +160,7 @@ function fSetManyuser() {
             sed -i "s/fucker/$MYSQL_PASS/g" $file
             sed -i "s/shadowsocks/$MYSQL_DB/g" $file
             sed -i "s/user/$MYSQL_TABLE/g" $file
-            echo -e -n "\033[44;37;5m ####  write the config successfully! #### \033[0m"
+            echo -e "\033[44;37;5m ####  write the config successfully! #### \033[0m"
             sleep 3
         else
             fSetManyuser
@@ -170,20 +170,17 @@ function fSetManyuser() {
 
 
 function fSetService() {
-    echo -e -n "\033[44;37;5m #### Do you want to put manyuser into system service? (y/n): #### \033[0m"
-    read confirm
-    if [ "$confirm"x = "y"x ]; then
-        # set ss as a service of system
-        touch ssstart.sh
-        chmod +x ssstart.sh
-        echo -e '#chkconfig: 35 24 25\n#description: start the shadowsocks\nservice iptables stop\ncd /root/shadowsocks/shadowsocks\nnohup python server.py >& /dev/null &' > ssstart.sh
-        cp ssstart.sh /etc/init.d/ssstart -f
-        chkconfig --add ssstart
-        nohup service ssstart >& /dev/null &
-        rm -f ssstart.sh
-    else
-        return
+    echo -e -n "\033[44;37;5m #### put ssscript into system service #### \033[0m"
+    # set ss as a service of system
+    if [ ! -f ssservice.sh ]
+        wget --no-check-certificate -O ssservice.sh https://raw.githubusercontent.com/VoganWong/ssscript/master/ssservice.sh
     fi
+    chmod +x ssservice.sh
+    cp ssservice.sh /etc/init.d/ssscript -f
+    chkconfig --add ssscript
+    nohup service ssscript start
+    sleep 3
+    rm -f ssservice.sh
 }
 
 cd ~
