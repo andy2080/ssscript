@@ -13,7 +13,7 @@
 ### Run It
 * ```wget https://raw.githubusercontent.com/VoganWong/ssscript/master/ssinit.sh```
 * ```chmod +x ssinit.sh```(with super right)
-* ```./ssinit.sh```
+* ```source ssinit.sh```(must run via 'source')
 
 ### Input Database
 * Mysql Host
