@@ -13,10 +13,10 @@ start() {
     #check the service status first
     if [ -f /var/lock/subsys/$SNAME ]
     then
-        echo "$SERVICE is already started!"
+        echo -e "$SERVICE is already started!\n"
         exit 0;
     else
-        echo -n $"Starting $SERVICE... "
+        echo -e $"Starting $SERVICE... \n"
         cd $WORKPATH
     	nohup python $SNAME >& /dev/null &
         RETVAL=$?
@@ -26,7 +26,7 @@ start() {
 }
 
 stop() {
-    echo "Stopping $SERVICE ..."
+    echo -e "Stopping $SERVICE ...\n"
     pkill -f $SNAME
     rm -rf /var/lock/subsys/$SNAME
 }
@@ -34,9 +34,9 @@ stop() {
 status() {
     if [ -f /var/lock/subsys/$SNAME ]
     then
-        echo "$SERVICE is running!"
+        echo -e "$SERVICE is running!\n"
     else
-        echo "$SERVICE is not running!"
+        echo -e "$SERVICE is not running!\n"
     fi
 }
 
